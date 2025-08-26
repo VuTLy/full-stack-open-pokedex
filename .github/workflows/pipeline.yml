@@ -37,3 +37,11 @@ jobs:
                 command: npm run test:e2e      # your Playwright test command
                 start: npm run start-prod      # start production server
                 wait-on: http://localhost:5000 # wait until server is ready
+
+            # Trigger deployment on Render
+            - name: Render Deployment
+              uses: sws2apps/render-deployment@v1.8.0
+              with:
+                serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+                apiKey: ${{ secrets.RENDER_API_KEY }}
+                multipleDeployment: false
