@@ -54,7 +54,14 @@ jobs:
       needs: [simple_deployment_pipeline]
       runs-on: ubuntu-latest
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      permissions:
+        contents: write
       steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0  # required for tag history
+            
         - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.64.0
           env:
